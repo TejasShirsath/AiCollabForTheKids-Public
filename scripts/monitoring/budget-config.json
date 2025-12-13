@@ -1,0 +1,9 @@
+{
+  "budget_cap": 200.00,
+  "current_period": "2025-12",
+  "usage": {
+    "opus": 10.63,
+    "sonnet": 2.45,
+    "haiku": 0.12
+  }
+}

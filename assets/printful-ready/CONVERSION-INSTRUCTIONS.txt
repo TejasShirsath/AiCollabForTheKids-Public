@@ -1,0 +1,69 @@
+# KRAKEN CLAUDE - PRINT FILE CONVERSION INSTRUCTIONS
+
+## Generated Files:
+1. kraken-claude-front.html - HTML template for PNG conversion
+2. kraken-claude-ascii.txt - Simple ASCII version
+3. kraken-claude-front.svg - Vector format (scalable)
+
+## CONVERTING TO PNG (300 DPI for Printful):
+
+### Option 1: Using Online Tool (Easiest)
+1. Go to: https://www.iloveimg.com/convert-to-jpg/svg-to-jpg
+2. Upload: kraken-claude-front.svg
+3. Convert to PNG (set to 4500x5400px or 300 DPI)
+4. Download and use for Printful
+
+### Option 2: Using Canva (Recommended)
+1. Sign up at: https://www.canva.com/ (free)
+2. Create custom size: 15" x 18" (or 4500 x 5400 px at 300 DPI)
+3. Import kraken-claude-front.svg
+4. Adjust colors/sizing as needed
+5. Download as PNG (300 DPI)
+6. Upload to Printful
+
+### Option 3: Using Browser Screenshot
+1. Open kraken-claude-front.html in Chrome
+2. Press F12 (Developer Tools)
+3. Toggle device toolbar (mobile view)
+4. Set dimensions: 1500 x 1800
+5. Right-click → "Capture screenshot"
+6. Upscale to 4500 x 5400 px using:
+   - https://www.upscale.media/ (AI upscaler)
+   - Or Adobe Photoshop (Image > Image Size > 300 DPI)
+
+## PRINTFUL UPLOAD:
+1. Go to: https://www.printful.com/dashboard/file-library
+2. Click "Upload files"
+3. Upload your 300 DPI PNG file
+4. Use in product designer
+
+## DESIGN DIMENSIONS:
+
+### T-Shirt Front:
+- Size: 12" x 16" (3600 x 4800 px @ 300 DPI)
+- Format: PNG with transparent background
+- Colors: RGB mode
+
+### Sticker:
+- Size: 3" x 3" (900 x 900 px @ 300 DPI + 0.125" bleed)
+- Format: PNG with transparent background
+
+### Mug (Full Wrap):
+- Size: 8.25" x 3.85" (2475 x 1155 px @ 300 DPI)
+- Format: PNG
+- Note: Wrap design around mug template
+
+### Hoodie Back:
+- Size: 12" x 16" (3600 x 4800 px @ 300 DPI)
+- Format: PNG with transparent background
+
+## COLOR CODES:
+- Cyan: #00D9FF
+- Orange: #FF6B35
+- White: #FFFFFF
+- Navy: #001F3F
+
+## QUESTIONS?
+Contact Printful Support: support@printful.com
+
+🎪 FOR THE KIDS - 50% → Verified Pediatric Charities 💙

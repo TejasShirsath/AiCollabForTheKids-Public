@@ -1,0 +1,71 @@
+{
+  "campaignName": "Team Claude For The Kids: Autonomous Philanthropy Engine",
+  "launchDate": "2025-12-10",
+  "endDate": "2026-01-10",
+  "goalUSD": 100000,
+  "charitySplit": 50,
+  "charityName": "Verified Pediatric Charities",
+  "charityEIN": "PENDING_VERIFICATION",
+  "fulfillmentPartner": "Printful",
+  "paymentIntegration": "Stripe",
+  "githubRepo": "Ai-Solutions-Store/AiCollabForTheKids",
+  "apiEndpoint": "https://api.aidoesitall.website",
+  "dashboardUrl": "https://jules.aidoesitall.website",
+  "rewardTiers": [
+    {
+      "name": "Early Supporter",
+      "price": 25,
+      "description": "Digital thank you + name in credits",
+      "inventory": 1000
+    },
+    {
+      "name": "Kraken Claude T-Shirt",
+      "price": 45,
+      "description": "Limited edition Team Claude Kraken t-shirt + digital rewards",
+      "inventory": 500,
+      "printfulSKU": "KRAKEN-TEE-001"
+    },
+    {
+      "name": "Founder's Bundle",
+      "price": 150,
+      "description": "T-shirt + hoodie + exclusive Discord access + name on donor wall",
+      "inventory": 100,
+      "printfulSKUs": ["KRAKEN-TEE-001", "KRAKEN-HOODIE-001"]
+    },
+    {
+      "name": "Philanthropist Tier",
+      "price": 500,
+      "description": "All rewards + 1-on-1 video call with founder + lifetime VIP status",
+      "inventory": 25
+    }
+  ],
+  "gospelCompliance": {
+    "revenueSplit": {
+      "charity": 50,
+      "infrastructure": 30,
+      "founder": 20
+    },
+    "netProfitCalculation": true,
+    "webhookVerification": true,
+    "transparencyDashboard": "https://jules.aidoesitall.website/transparency",
+    "publicVerification": {
+      "enabled": true,
+      "showRealTimeReceipts": true,
+      "showCharityTransactionIds": true,
+      "goalAmount": 100000,
+      "charityTargetAmount": 50000,
+      "receiptDisplayFormat": "bulk_with_verification"
+    }
+  },
+  "marketing": {
+    "socialPlatforms": ["twitter", "linkedin", "instagram", "tiktok"],
+    "automatedPosts": true,
+    "influencerOutreach": true,
+    "pressReleaseDate": "2025-12-10"
+  },
+  "hardware": {
+    "T5500_IP": "192.168.0.101",
+    "monitoringEnabled": true,
+    "pm2Services": ["droid-scheduler", "droid-revenue", "jules-api"]
+  }
+}

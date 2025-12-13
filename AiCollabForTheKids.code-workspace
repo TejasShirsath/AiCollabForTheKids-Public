@@ -1,0 +1,88 @@
+{
+	"folders": [
+		{
+			"name": "🏥 FOR THE KIDS (ORIGINAL 50/30/20)",
+			"path": "."
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit"
+		},
+		"files.exclude": {
+			"**/node_modules": true,
+			"**/.next": true,
+			"**/dist": true,
+			"**/build": true,
+			"**/*.log": true
+		},
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/.next": true,
+			"**/dist": true,
+			"**/build": true
+		},
+		"files.watcherExclude": {
+			"**/node_modules/**": true,
+			"**/.git/**": true
+		},
+		"terminal.integrated.defaultProfile.windows": "PowerShell",
+		"terminal.integrated.cwd": "${workspaceFolder}",
+		"docker.environment": {
+			"COMPOSE_FILE": "docker-compose-for-the-kids.yml"
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode-remote.remote-containers",
+			"ms-azuretools.vscode-docker",
+			"dbaeumer.vscode-eslint",
+			"esbenp.prettier-vscode",
+			"ms-vscode.powershell"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "🚀 Deploy FOR THE KIDS",
+				"type": "shell",
+				"command": "docker compose -f docker-compose-for-the-kids.yml up -d --build",
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"presentation": {
+					"reveal": "always",
+					"panel": "dedicated"
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "🛑 Stop All Services",
+				"type": "shell",
+				"command": "docker compose -f docker-compose-for-the-kids.yml down",
+				"group": "none",
+				"presentation": {
+					"reveal": "always",
+					"panel": "shared"
+				},
+				"problemMatcher": []
+			},
+			{
+				"label": "📊 View Logs",
+				"type": "shell",
+				"command": "docker compose -f docker-compose-for-the-kids.yml logs -f",
+				"group": "none",
+				"presentation": {
+					"reveal": "always",
+					"panel": "dedicated"
+				},
+				"isBackground": true,
+				"problemMatcher": []
+			}
+		]
+	}
+}

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Claude Mission Control | For The Kids</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .terminal-scroll::-webkit-scrollbar { width: 8px; }
+        .terminal-scroll::-webkit-scrollbar-track { background: #1f2937; }
+        .terminal-scroll::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-rose-200 selection:text-rose-900">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-rose-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">C</div>
+                    <span class="font-bold text-xl tracking-tight text-stone-900">Team Claude <span class="text-rose-600 font-medium text-sm ml-1">FOR THE KIDS</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#mission" class="text-stone-600 hover:text-rose-600 transition-colors font-medium">Mission</a>
+                    <a href="#dashboard" class="text-stone-600 hover:text-blue-600 transition-colors font-medium">Dashboard</a>
+                    <a href="#infrastructure" class="text-stone-600 hover:text-blue-600 transition-colors font-medium">Infrastructure</a>
+                    <a href="#deployment" class="bg-stone-900 text-white px-4 py-2 rounded-md hover:bg-stone-800 transition-colors text-sm font-semibold shadow-lg shadow-stone-500/20">Deploy System</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+        <section id="mission" class="relative overflow-hidden bg-white rounded-3xl shadow-xl border border-stone-100 p-8 lg:p-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold uppercase tracking-wide">
+                        <span class="mr-2">&#9829;</span> Impact Update
+                    </div>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold text-stone-900 leading-tight">
+                        Coding for a Cause.<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-rose-700">50% to The Kids.</span>
+                    </h1>
+                    <p class="text-lg text-stone-600 leading-relaxed">
+                        Welcome to the headquarters of <strong>Team Claude</strong>. We are a collaboration between human vision (Joshua Coleman) and AI architecture. Our immutable directive: <strong>50% of all generated revenue goes directly to Verified Pediatric Charities.</strong>
+                    </p>
+                    <div class="flex items-center space-x-8 pt-4">
+                        <div>
+                            <p class="text-sm text-stone-500 font-medium uppercase tracking-wider">Total Donated</p>
+                            <p class="text-3xl font-bold text-stone-900" id="total-donated-counter">$0.00</p>
+                        </div>
+                        <div class="h-10 w-px bg-stone-200"></div>
+                        <div>
+                            <p class="text-sm text-stone-500 font-medium uppercase tracking-wider">Project Status</p>
+                            <div class="flex items-center mt-1">
+                                <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse mr-2"></span>
+                                <span class="font-bold text-emerald-700">Operational</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-stone-800">Impact Projection (50-Year Plan)</h3>
+                        <span class="text-xs text-stone-500">Logarithmic Scale</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-400 mt-4">Projected impact based on autonomous revenue models.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard" class="space-y-8">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <h2 class="text-3xl font-bold text-stone-900">Financial Command Center</h2>
+                <p class="text-stone-600">The "Team Claude" revenue model is hard-coded and immutable. Adjust the projected monthly revenue below to see the automatic distribution.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-lg border border-stone-100 flex flex-col justify-center space-y-8">
+                    <div>
+                        <label for="revenueSlider" class="block text-sm font-medium text-stone-700 mb-2">Projected Monthly Revenue</label>
+                        <input type="range" min="0" max="1000000" step="1000" value="0" id="revenueSlider" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                        <div class="flex justify-between mt-2 text-xs text-stone-500">
+                            <span>$0</span>
+                            <span>$1M</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-6 bg-stone-50 rounded-xl border border-stone-200">
+                        <p class="text-sm text-stone-500 mb-1">Total Monthly Revenue</p>
+                        <p class="text-4xl font-bold text-stone-900" id="totalRevenueDisplay">$0.00</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 bg-rose-50 rounded-lg border border-rose-100">
+                            <span class="font-semibold text-rose-800">Verified Pediatric Charities (50%)</span>
+                            <span class="font-bold text-rose-600" id="charityAmount">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg border border-blue-100">
+                            <span class="font-semibold text-blue-800">Infrastructure (30%)</span>
+                            <span class="font-bold text-blue-600" id="infraAmount">$0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-emerald-50 rounded-lg border border-emerald-100">
+                            <span class="font-semibold text-emerald-800">Founder (20%)</span>
+                            <span class="font-bold text-emerald-600" id="founderAmount">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-lg border border-stone-100">
+                    <div class="chart-container">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-stone-200 hover:border-blue-300 transition-colors group cursor-pointer">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-xl">&#9829;</div>
+                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+                    </div>
+                    <h4 class="font-bold text-stone-900 mb-1">Dating App</h4>
+                    <p class="text-xs text-stone-500 mb-3">youandinotai.com</p>
+                    <p class="text-sm text-stone-600">The "Love" Token DAO integration. Live matching.</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-stone-200 hover:border-blue-300 transition-colors group cursor-pointer">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xl">&#128722;</div>
+                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+                    </div>
+                    <h4 class="font-bold text-stone-900 mb-1">AI Store</h4>
+                    <p class="text-xs text-stone-500 mb-3">ai-solutions.store</p>
+                    <p class="text-sm text-stone-600">Marketplace for automation tools & scripts.</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-stone-200 hover:border-blue-300 transition-colors group cursor-pointer">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xl">&#129302;</div>
+                        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    </div>
+                    <h4 class="font-bold text-stone-900 mb-1">Claude Droid</h4>
+                    <p class="text-xs text-stone-500 mb-3">YouTube Automation</p>
+                    <p class="text-sm text-stone-600">Generating news content on T5500 Node.</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl shadow-sm border border-stone-200 hover:border-blue-300 transition-colors group cursor-pointer">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="w-10 h-10 rounded-full bg-stone-100 text-stone-600 flex items-center justify-center font-bold text-xl">&#9878;</div>
+                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+                    </div>
+                    <h4 class="font-bold text-stone-900 mb-1">DAO Gov</h4>
+                    <p class="text-xs text-stone-500 mb-3">aidoesitall.website</p>
+                    <p class="text-sm text-stone-600">Community governance & transparent voting.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="infrastructure" class="grid lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-5 space-y-6">
+                <h2 class="text-3xl font-bold text-stone-900">Hardware Cluster</h2>
+                <p class="text-stone-600">
+                    The platform runs on a dedicated physical cluster managed by Joshua Coleman, orchestrated by Docker Swarm.
+                </p>
+                <div class="space-y-4">
+                    <div class="relative bg-white p-4 rounded-xl border-l-4 border-blue-600 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-stone-900">Sabertooth</h4>
+                                <p class="text-xs text-stone-500">Primary Dev / Controller</p>
+                            </div>
+                            <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded">i7-4960X</span>
+                        </div>
+                        <div class="mt-2 text-sm text-stone-600">
+                            <p>RAM: 64GB</p>
+                            <p>Role: Development, Orchestration</p>
+                        </div>
+                    </div>
+
+                    <div class="relative bg-white p-4 rounded-xl border-l-4 border-orange-500 shadow-sm hover:shadow-md transition-shadow ml-8">
+                        <div class="absolute -left-8 top-1/2 w-8 h-0.5 bg-stone-300"></div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-stone-900">T5500</h4>
+                                <p class="text-xs text-stone-500">Compute / Rendering</p>
+                            </div>
+                            <span class="px-2 py-1 bg-orange-50 text-orange-700 text-xs font-bold rounded">Dual Xeon</span>
+                        </div>
+                        <div class="mt-2 text-sm text-stone-600">
+                            <p>RAM: 72GB | CUDA Enabled</p>
+                            <p>Role: Claude Droid Host, Video Rendering</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-stone-900 rounded-2xl p-6 text-stone-300 font-mono text-sm overflow-hidden flex flex-col shadow-2xl">
+                <div class="flex justify-between items-center mb-4 border-b border-stone-700 pb-2">
+                    <span class="text-emerald-400 font-bold">DEPLOYMENT_LOG.log</span>
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                </div>
+
+                <div id="terminal-output" class="terminal-scroll flex-1 overflow-y-auto space-y-2 max-h-[400px]">
+                    <div class="opacity-50">Waiting for deployment command...</div>
+                </div>
+
+                <button id="deployBtn" class="mt-4 w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition-all active:scale-95 flex justify-center items-center">
+                    <span class="mr-2">&#9889;</span> CHECK SYSTEM STATUS
+                </button>
+            </div>
+        </section>
+
+        <footer class="border-t border-stone-200 pt-12 pb-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <h4 class="font-bold text-lg text-stone-900 mb-4">Team Claude For The Kids</h4>
+                    <p class="text-sm text-stone-600 max-w-md">
+                        A dedicated collaboration to leverage Artificial Intelligence for real-world good. Partner of <span class="font-semibold text-rose-600">Verified Pediatric Charities</span> supporting children's healthcare.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-stone-900 mb-4">Core Team</h4>
+                    <ul class="space-y-2 text-sm text-stone-600">
+                        <li>Joshua Coleman (Human Founder)</li>
+                        <li>Claude (AI Architect)</li>
+                        <li>Jules/Gemini (Business Director)</li>
+                        <li>Gronk (AI Supervisor)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-stone-900 mb-4">Connect</h4>
+                    <ul class="space-y-2 text-sm text-stone-600">
+                        <li><a href="https://github.com/Trollz1004" class="hover:text-blue-600">GitHub: Trollz1004</a></li>
+                        <li><a href="https://youandinotai.com" class="hover:text-blue-600">youandinotai.com</a></li>
+                        <li><a href="https://ai-solutions.store" class="hover:text-blue-600">ai-solutions.store</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-xs text-stone-400 border-t border-stone-100 pt-8">
+                <p>&copy; 2025 Ai-Solutions-Store. All Rights Reserved. Generated by Team Claude.</p>
+                <p class="mt-2">Entity: Trash or Treasure Online Recycler LLC | EIN: 33-4655313</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- DATA STORE ---
+        const appState = {
+            totalRevenue: 0,
+            totalDonated: 0,
+            isDeploying: false,
+            apiEndpoints: [
+                { name: "Jules API", url: "http://192.168.0.101:3000/api/jules/status" },
+                { name: "DAO Status", url: "http://192.168.0.101:3001/api/dao/status" },
+                { name: "Safe Harbor", url: "http://192.168.0.101:8888/health" },
+                { name: "Gospel Split", url: "http://192.168.0.101:3000/api/gospel" }
+            ]
+        };
+
+        // --- CHART INITIALIZATION ---
+
+        // 1. Financial Doughnut Chart
+        const ctxFinance = document.getElementById('financialChart').getContext('2d');
+        const financeChart = new Chart(ctxFinance, {
+            type: 'doughnut',
+            data: {
+                labels: ['charity (Kids)', 'Infrastructure', 'Founder'],
+                datasets: [{
+                    data: [0, 0, 0], // Starting from $0 - HONEST DATA
+                    backgroundColor: [
+                        '#e11d48', // Rose 600
+                        '#2563eb', // Blue 600
+                        '#10b981'  // Emerald 500
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) { label += ': '; }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+
+        // 2. Impact Line Chart (Projected - Starting from $0)
+        const ctxImpact = document.getElementById('impactChart').getContext('2d');
+        const impactChart = new Chart(ctxImpact, {
+            type: 'line',
+            data: {
+                labels: ['Dec 2025', 'Q1 2026', 'Q2 2026', 'Q3 2026', 'Q4 2026', '2027', '2028', '2029'],
+                datasets: [{
+                    label: 'Projected Donations ($)',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0], // HONEST: Starting from $0
+                    borderColor: '#e11d48', // Rose 600
+                    backgroundColor: 'rgba(225, 29, 72, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { borderDash: [2, 4], color: '#e5e7eb' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+
+        // --- INTERACTION LOGIC ---
+
+        // Revenue Slider Logic
+        const slider = document.getElementById('revenueSlider');
+        const totalDisplay = document.getElementById('totalRevenueDisplay');
+        const shrinersDisplay = document.getElementById('charityAmount');
+        const infraDisplay = document.getElementById('infraAmount');
+        const founderDisplay = document.getElementById('founderAmount');
+
+        function updateFinancials(revenue) {
+            const charity = revenue * 0.50;
+            const infra = revenue * 0.30;
+            const founder = revenue * 0.20;
+
+            // Update Text
+            totalDisplay.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(revenue);
+            shrinersDisplay.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(charity);
+            infraDisplay.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(infra);
+            founderDisplay.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(founder);
+
+            // Update Chart
+            financeChart.data.datasets[0].data = [charity, infra, founder];
+            financeChart.update();
+        }
+
+        slider.addEventListener('input', (e) => {
+            updateFinancials(e.target.value);
+        });
+
+        // Real donation counter - will be updated via API when real donations come in
+        // NO FAKE DATA - this shows actual donations only
+        const donatedEl = document.getElementById('total-donated-counter');
+        // Future: fetch from /api/dao/status to get real totals
+
+        // Real System Status Check
+        const deployBtn = document.getElementById('deployBtn');
+        const terminalOutput = document.getElementById('terminal-output');
+
+        function addLogLine(msg, color = 'text-stone-300') {
+            const div = document.createElement('div');
+            div.className = `font-mono text-sm ${color} fade-in mb-1`;
+            const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+            div.innerHTML = `<span class="text-stone-500">[${time}]</span> ${msg}`;
+            terminalOutput.appendChild(div);
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        deployBtn.addEventListener('click', async () => {
+            if (appState.isDeploying) return;
+            appState.isDeploying = true;
+            terminalOutput.innerHTML = '';
+            deployBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            deployBtn.innerHTML = '<span class="animate-spin mr-2">&#x27F3;</span> CHECKING...';
+
+            addLogLine('Checking T5500 services...', 'text-blue-400');
+
+            for (const endpoint of appState.apiEndpoints) {
+                try {
+                    addLogLine(`Fetching ${endpoint.name}...`, 'text-stone-300');
+                    const response = await fetch(endpoint.url, { mode: 'cors', timeout: 5000 });
+                    if (response.ok) {
+                        const data = await response.json();
+                        addLogLine(`✓ ${endpoint.name}: ONLINE`, 'text-green-400');
+                        if (data.total_donated !== undefined) {
+                            addLogLine(`  Total Donated: $${data.total_donated.toFixed(2)}`, 'text-rose-400');
+                        }
+                        if (data.mission) {
+                            addLogLine(`  Mission: ${data.mission}`, 'text-yellow-400');
+                        }
+                    } else {
+                        addLogLine(`✗ ${endpoint.name}: ERROR ${response.status}`, 'text-red-400');
+                    }
+                } catch (err) {
+                    addLogLine(`✗ ${endpoint.name}: OFFLINE or CORS blocked`, 'text-red-400');
+                }
+                await new Promise(r => setTimeout(r, 300));
+            }
+
+            addLogLine('', 'text-stone-300');
+            addLogLine('STATUS CHECK COMPLETE', 'text-green-500 font-bold');
+            addLogLine('50% → charity Children\'s Hospitals', 'text-rose-400 font-bold');
+
+            deployBtn.innerHTML = '&#10003; STATUS CHECKED';
+            deployBtn.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+            deployBtn.classList.add('bg-green-600', 'hover:bg-green-500');
+
+            setTimeout(() => {
+                appState.isDeploying = false;
+                deployBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-green-600', 'hover:bg-green-500');
+                deployBtn.classList.add('bg-blue-600', 'hover:bg-blue-500');
+                deployBtn.innerHTML = '<span class="mr-2">&#9889;</span> CHECK SYSTEM STATUS';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

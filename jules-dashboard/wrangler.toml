@@ -1,0 +1,25 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# CLOUDFLARE PAGES CONFIGURATION - Jules Dashboard
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Deploy: npx wrangler pages deploy dist
+#
+# FOR THE KIDS - 50% to Verified Pediatric Charities
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name = "jules-dashboard"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "dist"
+
+# Environment variables for production
+[vars]
+VITE_API_URL = "https://theoretical-bras-difference-kirk.trycloudflare.com"
+VITE_APP_NAME = "Jules Dashboard - FOR THE KIDS"
+
+# Production environment
+[env.production]
+vars = { VITE_API_URL = "https://theoretical-bras-difference-kirk.trycloudflare.com", VITE_ENV = "production" }
+
+# Preview/staging environment
+[env.preview]
+vars = { VITE_API_URL = "https://theoretical-bras-difference-kirk.trycloudflare.com", VITE_ENV = "preview" }

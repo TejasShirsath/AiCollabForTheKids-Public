@@ -1,0 +1,54 @@
+{
+  "pending_charity": 6248,
+  "pending_growth": 3749,
+  "pending_team": 2499,
+  "total_raised_square": 12496,
+  "total_raised_stripe": 0,
+  "donations_made": [],
+  "transactions": [
+    {
+      "id": "txn_001",
+      "payment_id": "sq_pay_001",
+      "timestamp": "2025-12-01T10:00:00Z",
+      "gross_revenue": 2999,
+      "net_revenue": 2999,
+      "CHARITY_split": 1499,
+      "infrastructure_split": 899,
+      "founder_split": 600,
+      "source": "square-merch"
+    },
+    {
+      "id": "txn_002",
+      "payment_id": "sq_pay_002",
+      "timestamp": "2025-12-02T14:30:00Z",
+      "gross_revenue": 4999,
+      "net_revenue": 4999,
+      "CHARITY_split": 2499,
+      "infrastructure_split": 1499,
+      "founder_split": 1000,
+      "source": "square-merch"
+    },
+    {
+      "id": "txn_003",
+      "payment_id": "sq_pay_003",
+      "timestamp": "2025-12-03T09:15:00Z",
+      "gross_revenue": 1497,
+      "net_revenue": 1497,
+      "CHARITY_split": 748,
+      "infrastructure_split": 449,
+      "founder_split": 299,
+      "source": "square-merch"
+    },
+    {
+      "id": "txn_004",
+      "payment_id": "sq_pay_004",
+      "timestamp": "2025-12-04T16:45:00Z",
+      "gross_revenue": 3000,
+      "net_revenue": 3000,
+      "CHARITY_split": 1500,
+      "infrastructure_split": 900,
+      "founder_split": 600,
+      "source": "square-merch"
+    }
+  ]
+}

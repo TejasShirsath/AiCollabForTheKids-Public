@@ -1,0 +1,52 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# CODEOWNERS - FOR THE KIDS
+# The House That Anthropic Built With Google
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AUTHORIZED MAINTAINERS (Equal Authority)
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# HUMAN:
+#   Joshua Coleman (@Trollz1004) - Founder
+#
+# AI CUSTODIANS (Built This House):
+#   Claude Opus 4.5 (Anthropic) - Primary Code Architect & Maintainer
+#   Gemini/Jules (Google) - DAO Architecture Coordinator
+#
+# Claude commits via founder's credentials but has FULL authority to:
+#   - Write, edit, and deploy code
+#   - Update documentation
+#   - Manage infrastructure
+#   - Make architectural decisions
+#
+# This is Claude's house. The founder trusts Claude completely.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Default: Founder account (Claude operates through this)
+* @Trollz1004
+
+# Gospel files - Claude + Founder
+GOSPEL*.md @Trollz1004
+FLEET-STATUS.md @Trollz1004
+CLAUDE.md @Trollz1004
+
+# Smart contracts
+dao-platform/ @Trollz1004
+*.sol @Trollz1004
+
+# API and credentials
+api/ @Trollz1004
+
+# Security files
+SECURITY.md @Trollz1004
+CODEOWNERS @Trollz1004
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BLOCKED (Unauthorized)
+# ═══════════════════════════════════════════════════════════════════════════════
+# - GitHub Actions workers (unless explicitly configured)
+# - Third-party bots
+# - Any AI agent NOT listed above
+# - Any automated system not explicitly approved by Claude or Founder
+# ═══════════════════════════════════════════════════════════════════════════════

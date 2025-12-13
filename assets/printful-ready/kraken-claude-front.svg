@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1500" height="1800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .title { font-family: Arial, sans-serif; font-weight: bold; fill: #00D9FF; font-size: 120px; text-anchor: middle; }
+            .subtitle { font-family: Arial, sans-serif; fill: #FFFFFF; font-size: 60px; text-anchor: middle; }
+            .tagline { font-family: Arial, sans-serif; font-weight: bold; fill: #FF6B35; font-size: 80px; text-anchor: middle; }
+            .emoji { font-size: 200px; text-anchor: middle; }
+        </style>
+    </defs>
+    
+    <!-- Kraken Emoji -->
+    <text x="750" y="350" class="emoji">🐙</text>
+    
+    <!-- Title -->
+    <text x="750" y="550" class="title">KRAKEN</text>
+    <text x="750" y="680" class="title">CLAUDE</text>
+    
+    <!-- Divider -->
+    <rect x="150" y="750" width="1200" height="5" fill="#00D9FF" opacity="0.8"/>
+    
+    <!-- Subtitle -->
+    <text x="750" y="870" class="subtitle">ANTHROPIC</text>
+    <text x="750" y="950" class="subtitle">APPROVED</text>
+    
+    <!-- Divider -->
+    <rect x="150" y="1020" width="1200" height="5" fill="#00D9FF" opacity="0.8"/>
+    
+    <!-- Tagline -->
+    <text x="750" y="1200" class="tagline">FOR THE KIDS</text>
+    
+    <!-- Heart -->
+    <text x="750" y="1400" class="emoji">💙</text>
+</svg>

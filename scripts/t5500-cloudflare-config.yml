@@ -1,0 +1,27 @@
+# Cloudflare Tunnel Configuration for T5500
+# FOR THE KIDS - Gospel v2.1
+
+url: http://localhost:3000
+tunnel: for-the-kids
+credentials-file: C:\Users\t55o\.cloudflared\for-the-kids.json
+
+# Route domains through tunnel
+ingress:
+  # Main site
+  - hostname: aidoesitall.website
+    service: http://localhost:8081
+  - hostname: www.aidoesitall.website
+    service: http://localhost:8081
+
+  # API
+  - hostname: api.aidoesitall.website
+    service: http://localhost:3000
+
+  # Dating App
+  - hostname: youandinotai.com
+    service: http://localhost:9000
+  - hostname: www.youandinotai.com
+    service: http://localhost:9000
+
+  # Catch-all
+  - service: http_status:404
