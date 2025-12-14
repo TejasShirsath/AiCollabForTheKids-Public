@@ -1,4 +1,4 @@
-export type View = 'dashboard' | 'antigravity' | 'domains' | 'scripts' | 'command' | 'governance' | 'audit' | 'security' | 'impact' | 'transparency' | 'gospel' | 'dating' | 'store' | 'dao' | 'kickstarter' | 'edu' | 'pr' | 'review' | 'media' | 'kids' | 'browser' | 'chat' | 'live' | 'mobile' | 'droid' | 'subscribe' | 'ops';
+export type View = 'dashboard' | 'antigravity' | 'domains' | 'scripts' | 'command' | 'governance' | 'audit' | 'security' | 'impact' | 'transparency' | 'gospel' | 'dating' | 'store' | 'dao' | 'kickstarter' | 'edu' | 'pr' | 'review' | 'media' | 'kids' | 'browser' | 'chat' | 'live' | 'mobile' | 'droid' | 'subscribe' | 'ops' | 'skeleton-demo';
 
 export interface Applicant {
   id: string;

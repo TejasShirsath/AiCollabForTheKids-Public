@@ -5,3 +5,11 @@
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './card';
 export { Badge } from './badge';
 export { Button } from './button';
+export { 
+  Skeleton, 
+  SkeletonText, 
+  SkeletonCard, 
+  SkeletonFinancialCard, 
+  SkeletonActivityLog 
+} from './skeleton';
+export { WithSkeleton, withSkeletonLoading, useSkeletonList } from './skeleton-wrapper';

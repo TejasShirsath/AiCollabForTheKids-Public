@@ -21,6 +21,7 @@ import OpsControl from './pages/OpsControl';
 import MediaCreatorDroid from './components/MediaCreatorDroid';
 import DatingPlatform from './components/DatingPlatform';
 import SubscriptionCheckout from './components/SubscriptionCheckout';
+import SkeletonDemo from './components/SkeletonDemo';
 import { Image, BookOpen } from './components/IconComponents';
 import { View } from './types';
 
@@ -111,6 +112,10 @@ const App: React.FC = () => {
             // Unified Ops Control
             case 'ops':
                 return <OpsControl />;
+            
+            // Development/Demo Views
+            case 'skeleton-demo':
+                return <SkeletonDemo />;
 
             default:
                 return <DashboardView />;

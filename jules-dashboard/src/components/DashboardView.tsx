@@ -2,8 +2,15 @@ import React, { useState } from 'react';
 import { Users, Server, Heart, DollarSign, ExternalLink, CheckCircle, Twitter } from './IconComponents';
 import { LedgerEntry, AgentNode } from '../types';
 import { GOSPEL_STATUS, MISSION_STATEMENT } from '../config/gospelStatus';
+import { SkeletonFinancialCard, SkeletonActivityLog, Skeleton, SkeletonText } from './ui/skeleton';
+import { useLoadingState } from '../hooks/useLoadingState';
 
 const DashboardView: React.FC = () => {
+  // Loading states for different dashboard sections
+  const { isLoading: isFinancialLoading } = useLoadingState({ minimumLoadTime: 1500 });
+  const { isLoading: isActivityLoading } = useLoadingState({ minimumLoadTime: 1200 });
+  const { isLoading: isStatsLoading } = useLoadingState({ minimumLoadTime: 800 });
+
   // Production: Empty ledger until real transactions exist
   const [ledger] = useState<LedgerEntry[]>([]);
   const [_nodes] = useState<AgentNode[]>([
@@ -79,17 +86,23 @@ const DashboardView: React.FC = () => {
       <div className="glass-card p-4 border-l-4 border-purple-500">
         <h3 className="text-sm font-bold text-purple-400 uppercase mb-3">Latest Activity</h3>
         <div className="space-y-2">
-          {GOSPEL_STATUS.activityLog.map((log, idx) => (
-            <div key={idx} className="flex items-start gap-3 p-2 bg-slate-800/30 rounded-lg">
-              <span className={`px-2 py-0.5 text-xs rounded ${log.type === 'milestone' ? 'bg-green-900/30 text-green-400' : 'bg-blue-900/30 text-blue-400'}`}>
-                {log.date}
-              </span>
-              <div>
-                <p className="text-sm font-medium text-white">{log.title}</p>
-                <p className="text-xs text-slate-400">{log.description}</p>
-              </div>
-            </div>
-          ))}
+          {isActivityLoading ? (
+            <SkeletonActivityLog />
+          ) : (
+            <>
+              {GOSPEL_STATUS.activityLog.map((log, idx) => (
+                <div key={idx} className="flex items-start gap-3 p-2 bg-slate-800/30 rounded-lg">
+                  <span className={`px-2 py-0.5 text-xs rounded ${log.type === 'milestone' ? 'bg-green-900/30 text-green-400' : 'bg-blue-900/30 text-blue-400'}`}>
+                    {log.date}
+                  </span>
+                  <div>
+                    <p className="text-sm font-medium text-white">{log.title}</p>
+                    <p className="text-xs text-slate-400">{log.description}</p>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
 
@@ -103,15 +116,31 @@ const DashboardView: React.FC = () => {
           </div>
         </div>
         <div className="flex gap-4 mt-4 md:mt-0">
-          <div className="text-right">
-            <p className="text-xs text-slate-400 uppercase tracking-wider">P21 Compliance</p>
-            <p className="text-3xl font-bold text-green-400">100%</p>
-          </div>
-          <div className="w-px h-10 bg-white/10"></div>
-          <div className="text-right">
-            <p className="text-xs text-slate-400 uppercase tracking-wider">Security Score</p>
-            <p className="text-3xl font-bold text-blue-400">98/100</p>
-          </div>
+          {isStatsLoading ? (
+            <>
+              <div className="text-right space-y-2">
+                <SkeletonText width="6rem" />
+                <Skeleton height="2.25rem" width="4rem" />
+              </div>
+              <div className="w-px h-10 bg-white/10"></div>
+              <div className="text-right space-y-2">
+                <SkeletonText width="6rem" />
+                <Skeleton height="2.25rem" width="4rem" />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="text-right">
+                <p className="text-xs text-slate-400 uppercase tracking-wider">P21 Compliance</p>
+                <p className="text-3xl font-bold text-green-400">100%</p>
+              </div>
+              <div className="w-px h-10 bg-white/10"></div>
+              <div className="text-right">
+                <p className="text-xs text-slate-400 uppercase tracking-wider">Security Score</p>
+                <p className="text-3xl font-bold text-blue-400">98/100</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -122,22 +151,33 @@ const DashboardView: React.FC = () => {
               <span className="px-3 py-1 rounded-full bg-green-900/30 text-green-400 text-xs font-bold border border-green-500/30 animate-pulse">LIVE AUDIT ACTIVE</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <div className="p-4 bg-slate-800/50 rounded-xl border border-white/5">
-                  <p className="text-xs text-slate-400 uppercase mb-1">Total Gross Revenue</p>
-                  <p className="text-2xl font-bold text-white">${totalGross.toLocaleString()}</p>
-              </div>
-              <div className="p-4 bg-green-900/20 rounded-xl border border-green-500/30 relative overflow-hidden">
-                  <p className="text-xs text-green-400 uppercase mb-1 font-bold flex items-center gap-2"><Heart className="w-3 h-3 fill-green-400" /> For The Kids (60%)</p>
-                  <p className="text-2xl font-bold text-green-300">${totalShriners.toLocaleString()}</p>
-              </div>
-              <div className="p-4 bg-blue-900/20 rounded-xl border border-blue-500/30">
-                  <p className="text-xs text-blue-400 uppercase mb-1 font-bold flex items-center gap-2"><Server className="w-3 h-3" /> Infra & Scale (30%)</p>
-                  <p className="text-2xl font-bold text-blue-300">${(totalGross * 0.3).toLocaleString()}</p>
-              </div>
-              <div className="p-4 bg-purple-900/20 rounded-xl border border-purple-500/30">
-                  <p className="text-xs text-purple-400 uppercase mb-1 font-bold flex items-center gap-2"><Users className="w-3 h-3" /> Founder (10%)</p>
-                  <p className="text-2xl font-bold text-purple-300">${(totalGross * 0.1).toLocaleString()}</p>
-              </div>
+              {isFinancialLoading ? (
+                <>
+                  <SkeletonFinancialCard />
+                  <SkeletonFinancialCard className="bg-green-900/20 border-green-500/30" />
+                  <SkeletonFinancialCard className="bg-blue-900/20 border-blue-500/30" />
+                  <SkeletonFinancialCard className="bg-purple-900/20 border-purple-500/30" />
+                </>
+              ) : (
+                <>
+                  <div className="p-4 bg-slate-800/50 rounded-xl border border-white/5 transition-all duration-500 ease-in-out transform animate-in fade-in-0 slide-in-from-bottom-4">
+                      <p className="text-xs text-slate-400 uppercase mb-1">Total Gross Revenue</p>
+                      <p className="text-2xl font-bold text-white">${totalGross.toLocaleString()}</p>
+                  </div>
+                  <div className="p-4 bg-green-900/20 rounded-xl border border-green-500/30 relative overflow-hidden transition-all duration-500 ease-in-out transform animate-in fade-in-0 slide-in-from-bottom-4 delay-75">
+                      <p className="text-xs text-green-400 uppercase mb-1 font-bold flex items-center gap-2"><Heart className="w-3 h-3 fill-green-400" /> For The Kids (60%)</p>
+                      <p className="text-2xl font-bold text-green-300">${totalShriners.toLocaleString()}</p>
+                  </div>
+                  <div className="p-4 bg-blue-900/20 rounded-xl border border-blue-500/30 transition-all duration-500 ease-in-out transform animate-in fade-in-0 slide-in-from-bottom-4 delay-150">
+                      <p className="text-xs text-blue-400 uppercase mb-1 font-bold flex items-center gap-2"><Server className="w-3 h-3" /> Infra & Scale (30%)</p>
+                      <p className="text-2xl font-bold text-blue-300">${(totalGross * 0.3).toLocaleString()}</p>
+                  </div>
+                  <div className="p-4 bg-purple-900/20 rounded-xl border border-purple-500/30 transition-all duration-500 ease-in-out transform animate-in fade-in-0 slide-in-from-bottom-4 delay-300">
+                      <p className="text-xs text-purple-400 uppercase mb-1 font-bold flex items-center gap-2"><Users className="w-3 h-3" /> Founder (10%)</p>
+                      <p className="text-2xl font-bold text-purple-300">${(totalGross * 0.1).toLocaleString()}</p>
+                  </div>
+                </>
+              )}
           </div>
       </div>
     </div>
